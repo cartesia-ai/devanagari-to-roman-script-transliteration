@@ -1,6 +1,6 @@
 # Devanagari to Roman Script Transliteration
 
-A Python package for transliterating Hindi (Devanagari) text to Roman script.
+A Python package for transliterating Hindi (Devanagari) text to Roman script. This is based on the work by [Ritwik Mishra](https://github.com/ritwikmishra/devanagari-to-roman-script-transliteration).
 
 ## Installation
 
@@ -32,3 +32,18 @@ print(roman_text)  # Output: "namaste duniya"
 ## License
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+
+## Citation
+
+If you use this code, please cite the original work:
+
+```bibtex
+@misc{Mishra2019,
+  author       = {Mishra, Ritwik},
+  title        = {devanagari-to-roman-script-transliteration},
+  year         = {2019},
+  publisher    = {GitHub},
+  journal      = {GitHub repository},
+  howpublished = {\url{https://github.com/ritwikmishra/devanagari-to-roman-script-transliteration}},
+}
+```

@@ -39,7 +39,7 @@ def test_specific_cases(transliterator):
         ("चाँद", "chaand"),
         ("क्षमा", "kshama"),
         ("लक्ष्मी", "lakshmi"),
-        # ("ज्ञान", "gyan"),
+        ("ज्ञान", "gyan"),
         ("पद्म", "padm"),
         ("१२३", "123"),
     ]
