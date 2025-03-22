@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "devanagari-to-roman-script-transliteration"
+version = "0.1.0"
+description = "A Python package for transliterating Hindi (Devanagari) text to Roman script"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "GPL-3.0-or-later"
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.1.5",
+    "pre-commit>=3.5.0",
+    "pyyaml>=6.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hindi_transliteration"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
+
+ignore = [
+    "E501",  # Line too long
+    "C406",  # Unnecessary list literal
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.isort]
+combine-as-imports = true
