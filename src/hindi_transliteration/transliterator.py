@@ -27,7 +27,6 @@ class HindiTransliterator:
         digits=HINDI_DIGITS,
         symbols=HINDI_SYMBOLS,
     ):
-        # Store all mappings
         self.independent_vowels = independent_vowels
         self.dependent_vowels = dependent_vowels
         self.consonants = consonants
@@ -37,7 +36,6 @@ class HindiTransliterator:
         self.digits = digits
         self.symbols = symbols
 
-        # Combined mapping for easy lookup
         self.all_mappings = {
             **independent_vowels,
             **dependent_vowels,
@@ -52,9 +50,7 @@ class HindiTransliterator:
         # Define word boundary characters
         self.word_boundaries = [" ", "\n", "\t", ":", "।", ".", ",", "!", "?", ";", "-"]
 
-        # Create modified vowel mappings for special cases
         self.special_vowel_mappings = dependent_vowels.copy()
-        # Modify specific vowel signs for word boundaries and vowel conjuncts
         if "ा" in self.special_vowel_mappings:
             self.special_vowel_mappings["ा"] = "a"
         if "ी" in self.special_vowel_mappings:
@@ -103,16 +99,10 @@ class HindiTransliterator:
         content = self._normalize_nukta_combinations(content)
         content = self._normalize_additional_symbols(content)
 
-        # Process the text to handle different scenarios
-        result = ""
         i = 0
-
         # Step 1: Process text to handle implicit "a" and special cases
         content2 = ""
         while i < len(content):
-            # For debugging
-            print(content2)
-
             if content[i] == "\u094d":  # halant
                 content2 += content[i]
             elif content[i] in self.digits.keys():
@@ -203,7 +193,6 @@ class HindiTransliterator:
                         i += 1
                         continue
 
-                    # Rest of the existing logic for non-halant cases
                     if self._is_consonant(content[i]) and self._is_consonant(content[i + 1]):
                         if (
                             i == 0 or content[i - 1] in [" ", "\n", "\t", ":", "।"]
@@ -225,7 +214,6 @@ class HindiTransliterator:
                             content2 = content2 + content[i]
                     else:
                         if content[i + 1] == "ं":  # anusvara
-                            print("Shrey: ", content[i], content[i + 1], content[i + 2])
                             if i + 2 < len(content):
                                 if self._is_consonant(content[i]) and not self._is_vowel(
                                     content[i + 2]
@@ -245,7 +233,6 @@ class HindiTransliterator:
                 content2 += content[i]
             i += 1
 
-        print(content2)
         content = content2
 
         # Step 2: Process the transliteration, with special handling for word boundaries and vowel sequences
@@ -253,8 +240,6 @@ class HindiTransliterator:
         result = ""
 
         while i < len(content):
-            print(content[i], result)
-
             # Check for special cases for vowel signs
             # Case 1: Badi aa ki matra (ा) at word boundary or before chandrabindu
             if content[i] == "ा":
@@ -262,10 +247,10 @@ class HindiTransliterator:
                 is_at_word_end = self._is_word_boundary(next_char)
                 # Case 1a: At word boundary
                 if is_at_word_end:
-                    result += self.special_vowel_mappings["ा"]  # Single 'a'
+                    result += self.special_vowel_mappings["ा"]
                 # Case 1b: Next to another vowel
                 elif next_char and self._is_vowel(next_char):
-                    result += self.special_vowel_mappings["ा"]  # Single 'a'
+                    result += self.special_vowel_mappings["ा"]
                 else:
                     result += self.dependent_vowels["ा"]
 
@@ -275,9 +260,9 @@ class HindiTransliterator:
                 is_at_word_end = self._is_word_boundary(next_char)
 
                 if is_at_word_end:
-                    result += self.special_vowel_mappings["ी"]  # Single 'i'
+                    result += self.special_vowel_mappings["ी"]
                 elif next_char and self._is_diacritic(next_char):
-                    result += self.special_vowel_mappings["ी"]  # Single 'i'
+                    result += self.special_vowel_mappings["ी"]
                 else:
                     result += self.dependent_vowels["ी"]
 

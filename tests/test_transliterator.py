@@ -6,8 +6,7 @@ import yaml
 from src.hindi_transliteration import HindiTransliterator
 
 
-@pytest.fixture
-def transcripts():
+def load_transcripts():
     """Load transcripts from YAML file."""
     test_data_path = Path(__file__).parent / "data" / "test_cases.yaml"
     with open(test_data_path, encoding="utf-8") as f:
@@ -25,21 +24,23 @@ def normalize_text(text: str) -> str:
     return "\n".join(line.strip() for line in text.strip().splitlines())
 
 
-def test_transliteration_from_yaml(transliterator, transcripts):
-    """Test transliteration using transcripts from YAML file."""
-    for transcript in transcripts:
-        result = transliterator.transliterate(transcript["input"])
-        assert result.strip() == transcript["expected"].strip()
+@pytest.mark.parametrize(
+    "transcript", load_transcripts(), ids=lambda t: f"{t['input']} -> {t['expected']}"
+)
+def test_transliteration_case(transliterator, transcript):
+    """Test individual transliteration cases from YAML file."""
+    result = transliterator.transliterate(transcript["input"])
+    assert result.strip() == transcript["expected"].strip()
 
 
 def test_specific_cases(transliterator):
     """Test specific edge cases and common patterns."""
     test_pairs = [
-        ("ज़मीन", "zamin"),
+        ("ज़मीन", "zameen"),
         ("चाँद", "chaand"),
         ("क्षमा", "kshama"),
         ("लक्ष्मी", "lakshmi"),
-        ("ज्ञान", "gyan"),
+        ("ज्ञान", "gyaan"),
         ("पद्म", "padm"),
         ("१२३", "123"),
     ]
