@@ -31,3 +31,5 @@ transcripts:
     expected: "are raajesh! yahaan aao yaar, ye jo tumhaare sasur ji hain n, bare dilachasp insaan hain."
   - input: "आपको बजाना- वजाना भी आता है, सिर्फ पोज़ लेकर खड़े हैं।"
     expected: "aapko bajaana- vajaana bhi aata hai, sirph poz lekar khare hain."
+  - input: "जीवन में जब अंधेरा छाए, दीप जलाकर रखना।मन में उम्मीद का दामन, कभी न हाथ से जाने देना।राहें भले ही कठिन हों, हिम्मत से आगे बढ़ना। हर मुश्किल को आसान बनाकर, नई मंजिलें पाना।"
+    expected: "jeevan mein jab andhera chhae, deep jalaakar rakhna. man mein ummeed ka daaman, kabhi n haath se jaane dena. raahein bhale hi kathin hon, himmat se aage badhna. har mushkil ko aasaan banaakar, nee manjilein paana."
