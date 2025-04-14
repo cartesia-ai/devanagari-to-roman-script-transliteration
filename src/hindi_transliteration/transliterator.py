@@ -64,9 +64,21 @@ class HindiTransliterator:
 
     def _normalize_additional_symbols(self, text: str) -> str:
         """Normalize additional symbols."""
+        result = ""
+        i = 0
+        while i < len(text):
+            if text[i] == "।":
+                result += "."
+                if i + 1 < len(text) and not text[i + 1].isspace():
+                    result += " "
+            else:
+                result += text[i]
+            i += 1
+
         for symbol, replacement in self.symbols.items():
-            text = text.replace(symbol, replacement)
-        return text
+            result = result.replace(symbol, replacement)
+
+        return result
 
     def _is_consonant(self, char: str) -> bool:
         """Check if a character is a Hindi consonant."""
